@@ -4,5 +4,6 @@ public enum Role {
 
     DIRECTOR,
     COMPOSER,
-    PRODUCER
+    PRODUCER,
+    ACTOR
 }

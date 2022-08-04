@@ -9,7 +9,9 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @ToString(callSuper = true)
 @SuperBuilder
-public class CrewMember extends Person {
+public class CrewMember {
 
+  private String firstName;
+  private String lastName;
   private Role role;
 }
