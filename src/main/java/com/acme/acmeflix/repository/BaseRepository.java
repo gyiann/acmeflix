@@ -4,7 +4,7 @@ import com.acme.acmeflix.model.BaseModel;
 
 import java.util.List;
 
-public interface BaseRepository<T extends BaseModel> {
+public interface BaseRepository<T extends BaseModel, K> {
 
     T create(final T entity);
 
@@ -16,9 +16,11 @@ public interface BaseRepository<T extends BaseModel> {
 
     void delete(T entity);
 
+    void deleteById(K id);
+
     boolean exists(T entity);
 
-    T get(Long id);
+    T get(K id);
 
     List<T> findAll();
 }
