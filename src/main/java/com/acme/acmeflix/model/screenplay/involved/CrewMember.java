@@ -1,5 +1,6 @@
 package com.acme.acmeflix.model.screenplay.involved;
 
+import com.acme.acmeflix.model.BaseModel;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
@@ -9,7 +10,7 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @ToString(callSuper = true)
 @SuperBuilder
-public class CrewMember {
+public class CrewMember extends BaseModel {
 
   private String firstName;
   private String lastName;
