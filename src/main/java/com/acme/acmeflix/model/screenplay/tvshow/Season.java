@@ -1,14 +1,20 @@
 package com.acme.acmeflix.model.screenplay.tvshow;
 
-import lombok.Builder;
-import lombok.Data;
+import com.acme.acmeflix.model.BaseModel;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
+import java.util.HashSet;
 import java.util.Set;
 
-@Data
-@Builder
-public class Season {
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString(callSuper = true)
+@SuperBuilder
+public class Season extends BaseModel {
 
-    private short number;
-    private Set<Episode> episodes;
+    private int number;
+    private Set<Episode> episodes = new HashSet<>();
 }

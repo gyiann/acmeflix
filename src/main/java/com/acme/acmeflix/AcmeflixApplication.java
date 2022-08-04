@@ -7,7 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class AcmeflixApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(AcmeflixApplication.class, args);
-    }
 
+        SpringApplication.run(AcmeflixApplication.class, args);
+
+
+    }
 }

@@ -1,16 +1,23 @@
 package com.acme.acmeflix.model.account;
 
-import lombok.Builder;
-import lombok.Data;
+import com.acme.acmeflix.model.BaseModel;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.util.Set;
 
-@Data
-@Builder
-public class Account {
-
+@Setter
+@Getter
+//@RequiredArgsConstructor
+@AllArgsConstructor
+//@NoArgsConstructor
+@ToString(callSuper = true)
+@SuperBuilder
+public class Account extends BaseModel {
+    
     private String email;
     private String phoneNumber;
     private SubscriptionPlan subscriptionPlan;
     private Set<Profile> profiles;
+
 }

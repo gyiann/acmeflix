@@ -5,7 +5,8 @@ import lombok.experimental.SuperBuilder;
 
 @Setter
 @Getter
-@EqualsAndHashCode(callSuper = true)
+@AllArgsConstructor
+@NoArgsConstructor
 @ToString(callSuper = true)
 @SuperBuilder
 public class CrewMember extends Person {

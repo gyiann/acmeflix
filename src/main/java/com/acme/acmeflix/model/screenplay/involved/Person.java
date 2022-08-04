@@ -1,11 +1,16 @@
 package com.acme.acmeflix.model.screenplay.involved;
 
-import lombok.Data;
+import com.acme.acmeflix.model.BaseModel;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
-@Data
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString(callSuper = true)
 @SuperBuilder
-public abstract class Person {
+public abstract class Person extends BaseModel {
 
     private String firstName;
     private String lastName;
