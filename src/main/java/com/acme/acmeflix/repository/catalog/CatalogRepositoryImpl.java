@@ -1,6 +1,7 @@
-package com.acme.acmeflix.repository;
+package com.acme.acmeflix.repository.catalog;
 
 import com.acme.acmeflix.model.catalog.Catalog;
+import com.acme.acmeflix.repository.BaseRepositoryImpl;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashSet;
