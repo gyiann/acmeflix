@@ -26,18 +26,21 @@ public abstract class BaseServiceImpl<T extends BaseModel> extends BaseComponent
     }
 
     @Override
-    public void update(T entity) {
-        getRepository().update(entity);
+    public boolean update(T entity) {
+
+        return getRepository().update(entity) ;
     }
 
     @Override
-    public void delete(T entity) {
-        getRepository().delete(entity);
+    public boolean delete(T entity) {
+
+        return getRepository().delete(entity);
     }
 
     @Override
-    public void deleteById(Long id) {
-        getRepository().deleteById(id);
+    public boolean deleteById(Long id) {
+
+        return getRepository().deleteById(id);
     }
 
     @Override

@@ -46,26 +46,31 @@ public abstract class BaseRepositoryImpl<T extends BaseModel> extends BaseCompon
     }
 
     @Override
-    public void update(T entity) {
+    public boolean update(T entity) {
         if (getMap().containsKey(entity.getId())) {
             getMap().put(entity.getId(), entity);
             logger.info("Updated {} with id: {}.", getType().getSimpleName(), entity.getId());
+            return true;
         } else {
             logger.info("{} with id: {} does not exist.", getType().getSimpleName(), entity.getId());
+            return false;
         }
     }
 
     @Override
-    public void delete(T entity) {
-        deleteById(entity.getId());
+    public boolean delete(T entity) {
+
+        return deleteById(entity.getId());
     }
 
     @Override
-    public void deleteById(Long id) {
+    public boolean deleteById(Long id) {
         if (getMap().remove(id) != null) {
             logger.info("Deleted {} with id: {}.", getType().getSimpleName(), id);
+            return true;
         } else {
             logger.info("{} with id: {} you tried to delete, does not exist.", getType().getSimpleName(), id);
+            return false;
         }
     }
 

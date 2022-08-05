@@ -12,11 +12,11 @@ public interface BaseService<T extends BaseModel, K> {
 
     List<T> createAll(final List<T> entities);
 
-    void update(T entity);
+    boolean update(T entity);
 
-    void delete(T entity);
+    boolean delete(T entity);
 
-    void deleteById(K id);
+    boolean deleteById(K id);
 
     boolean exists(T entity);
 
