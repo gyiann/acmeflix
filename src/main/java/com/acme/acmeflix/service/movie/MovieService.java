@@ -12,7 +12,4 @@ public interface MovieService extends BaseService<Movie, Long> {
 
     Set<Movie> findByGenre(Genre genre);
 
-    void addMovie(Movie movie);
-
-    void removeMovie(Movie movie);
 }

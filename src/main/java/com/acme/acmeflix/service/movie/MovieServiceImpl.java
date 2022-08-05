@@ -31,13 +31,4 @@ public class MovieServiceImpl extends BaseServiceImpl<Movie> implements MovieSer
         return movieRepository.findByGenre(genre);
     }
 
-    @Override
-    public void addMovie(Movie movie) {
-        movieRepository.addMovie(movie);
-    }
-
-    @Override
-    public void removeMovie(Movie movie) {
-        movieRepository.removeMovie(movie);
-    }
 }
