@@ -24,9 +24,9 @@ public abstract class BaseRepositoryImpl<T extends BaseModel> extends BaseCompon
     public T create(T entity) {
         Long currentId = getIdCounter().getAndIncrement();
         entity.setId(currentId);
-        T createdEntity = getMap().put(entity.getId(), entity);
+        getMap().put(entity.getId(), entity);
         logger.info("Created new {} with id: {}.", entity.getClass().getSimpleName(), entity.getId());
-        return createdEntity;
+        return entity;
     }
 
     @Override
