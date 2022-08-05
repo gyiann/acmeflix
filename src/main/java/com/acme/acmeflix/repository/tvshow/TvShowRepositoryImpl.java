@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 @Repository
 public class TvShowRepositoryImpl extends BaseRepositoryImpl<TvShow> implements TvShowRepository {
-    private static final AtomicLong idCounter = new AtomicLong();
+    private static final AtomicLong idCounter = new AtomicLong(1);
     private static final Map<Long, TvShow> tvShows = new LinkedHashMap<>();
 
     @Override

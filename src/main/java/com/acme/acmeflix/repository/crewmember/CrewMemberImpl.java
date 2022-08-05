@@ -10,7 +10,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 @Repository
 public class CrewMemberImpl extends BaseRepositoryImpl<CrewMember> implements CrewMemberRepository {
-    private static final AtomicLong idCounter = new AtomicLong();
+    private static final AtomicLong idCounter = new AtomicLong(1);
     private static final Map<Long, CrewMember> crewMembers = new LinkedHashMap<>();
 
     @Override

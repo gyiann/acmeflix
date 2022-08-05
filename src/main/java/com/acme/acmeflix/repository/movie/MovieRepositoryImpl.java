@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 @Repository
 public class MovieRepositoryImpl extends BaseRepositoryImpl<Movie> implements MovieRepository {
-    private static final AtomicLong idCounter = new AtomicLong();
+    private static final AtomicLong idCounter = new AtomicLong(1);
     private static final Map<Long, Movie> movies = new LinkedHashMap<>();
     private static final Set<Rating> ratings = new LinkedHashSet<>();
 

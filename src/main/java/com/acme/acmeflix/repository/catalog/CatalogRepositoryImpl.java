@@ -14,7 +14,7 @@ import java.util.concurrent.atomic.AtomicLong;
 @Repository
 public class CatalogRepositoryImpl extends BaseRepositoryImpl<Catalog> implements CatalogRepository {
 
-    private static final AtomicLong idCounter = new AtomicLong();
+    private static final AtomicLong idCounter = new AtomicLong(1);
     private static final Map<Long, Catalog> catalogs = new LinkedHashMap<>();
 
     @Override

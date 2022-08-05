@@ -13,7 +13,7 @@ import java.util.concurrent.atomic.AtomicLong;
 @Repository
 public class AccountRepositoryImpl extends BaseRepositoryImpl<Account> implements AccountRepository {
 
-    private static final AtomicLong idCounter = new AtomicLong();
+    private static final AtomicLong idCounter = new AtomicLong(1);
     private static final Map<Long, Account> accounts = new LinkedHashMap<>();
 
     @Override
