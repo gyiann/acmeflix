@@ -1,5 +1,6 @@
 package com.acme.acmeflix.service.catalog;
 
+import com.acme.acmeflix.exception.BusinessException;
 import com.acme.acmeflix.model.catalog.Catalog;
 import com.acme.acmeflix.model.catalog.Country;
 import com.acme.acmeflix.model.screenplay.movie.Movie;
@@ -22,22 +23,22 @@ public class CatalogServiceImpl extends BaseServiceImpl<Catalog> implements Cata
     }
 
     @Override
-    public Movie addMovie(Catalog catalog, Movie movie) {
+    public boolean addMovie(Catalog catalog, Movie movie) throws BusinessException {
         return catalogRepository.addMovie(catalog, movie);
     }
 
     @Override
-    public Movie removeMovie(Catalog catalog, Movie movie) {
+    public boolean removeMovie(Catalog catalog, Movie movie) throws BusinessException {
         return catalogRepository.removeMovie(catalog, movie);
     }
 
     @Override
-    public TvShow addTvShow(Catalog catalog, TvShow tvShow) {
+    public boolean addTvShow(Catalog catalog, TvShow tvShow) throws BusinessException {
         return catalogRepository.addTvShow(catalog, tvShow);
     }
 
     @Override
-    public TvShow removeTvShow(Catalog catalog, TvShow tvShow) {
+    public boolean removeTvShow(Catalog catalog, TvShow tvShow) throws BusinessException {
         return catalogRepository.removeTvShow(catalog, tvShow);
     }
 

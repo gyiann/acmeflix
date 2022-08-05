@@ -1,5 +1,6 @@
 package com.acme.acmeflix.repository.catalog;
 
+import com.acme.acmeflix.exception.BusinessException;
 import com.acme.acmeflix.model.catalog.Catalog;
 import com.acme.acmeflix.model.catalog.Country;
 import com.acme.acmeflix.model.screenplay.movie.Movie;
@@ -33,27 +34,44 @@ public class CatalogRepositoryImpl extends BaseRepositoryImpl<Catalog> implement
     }
 
     @Override
-    public Movie addMovie(Catalog catalog, Movie movie) {
-        return catalogs.get(catalog.getId()).getMovies().add(movie) ? movie : null;
+    public boolean addMovie(Catalog catalog, Movie movie)  throws BusinessException {
+        boolean movieAdded = catalogs.get(catalog.getId()).getMovies().add(movie);
+        if (!movieAdded) {
+            throw new BusinessException("Could not add movie.");
+        }
+        return true;
     }
 
     @Override
-    public Movie removeMovie(Catalog catalog, Movie movie) {
-        return catalogs.get(catalog.getId()).getMovies().remove(movie) ? movie : null;
+    public boolean removeMovie(Catalog catalog, Movie movie) throws BusinessException{
+        boolean movieRemoved = catalogs.get(catalog.getId()).getMovies().remove(movie);
+        if (!movieRemoved) {
+            throw new BusinessException("Could not remove movie.");
+        }
+        return true;
     }
 
     @Override
-    public TvShow addTvShow(Catalog catalog, TvShow tvShow) {
-        return catalogs.get(catalog.getId()).getTvShows().add(tvShow) ? tvShow : null;
+    public boolean addTvShow(Catalog catalog, TvShow tvShow)  throws BusinessException{
+        boolean tvShowAdded = catalogs.get(catalog.getId()).getTvShows().add(tvShow);
+        if (!tvShowAdded) {
+            throw new BusinessException("Could not add tv show.");
+        }
+        return true;
     }
 
     @Override
-    public TvShow removeTvShow(Catalog catalog, TvShow tvShow) {
-        return catalogs.get(catalog.getId()).getTvShows().add(tvShow) ? tvShow : null;
+    public boolean removeTvShow(Catalog catalog, TvShow tvShow)  throws BusinessException{
+        boolean tvShowAdded = catalogs.get(catalog.getId()).getTvShows().add(tvShow);
+        if (!tvShowAdded) {
+            throw new BusinessException("Could not add tv show.");
+        }
+        return true;
     }
 
     @Override
     public Catalog getCatalog(Country country) {
         return null;
     }
+
 }
