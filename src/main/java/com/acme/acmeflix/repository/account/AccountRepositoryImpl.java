@@ -34,6 +34,14 @@ public class AccountRepositoryImpl extends BaseRepositoryImpl<Account> implement
     }
 
     @Override
+    public Account create(Account account) {
+        if (account.getProfiles() == null) {
+            account.setProfiles(new HashSet<>());
+        }
+        return super.create(account);
+    }
+
+    @Override
     public Account findByEmail(String email) {
 
         return findAll().stream()
@@ -57,7 +65,6 @@ public class AccountRepositoryImpl extends BaseRepositoryImpl<Account> implement
                 .myList(new HashSet<>())
                 .build();
 
-        initializeProfilesIfAbsent(account);
         account.getProfiles().add(profile);
         return profile;
     }
@@ -65,47 +72,30 @@ public class AccountRepositoryImpl extends BaseRepositoryImpl<Account> implement
     @Override
     public boolean removeProfile(Account account, Profile profile) {
 
-        initializeProfilesIfAbsent(account);
         return account.getProfiles().remove(profile);
     }
 
     @Override
     public Set<Profile> getProfiles(Account account) {
 
-        initializeProfilesIfAbsent(account);
         return new HashSet<>(account.getProfiles());
     }
 
     @Override
     public boolean addToMyList(Profile profile, ScreenPlay screenPlay) {
 
-        initializeMyListIfAbsent(profile);
         return profile.getMyList().add(screenPlay);
     }
 
     @Override
     public boolean removeFromMyList(Profile profile, ScreenPlay screenPlay) {
 
-        initializeMyListIfAbsent(profile);
         return profile.getMyList().remove(screenPlay);
     }
 
     @Override
     public Set<ScreenPlay> getMyList(Profile profile) {
 
-        initializeMyListIfAbsent(profile);
         return new HashSet<>(profile.getMyList());
-    }
-
-    private void initializeProfilesIfAbsent(Account account) {
-        if (account.getProfiles() == null) {
-            account.setProfiles(new HashSet<>());
-        }
-    }
-
-    private void initializeMyListIfAbsent(Profile profile) {
-        if (profile.getMyList() == null) {
-            profile.setMyList(new HashSet<>());
-        }
     }
 }
