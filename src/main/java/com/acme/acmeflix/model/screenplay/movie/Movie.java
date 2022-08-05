@@ -1,33 +1,16 @@
 package com.acme.acmeflix.model.screenplay.movie;
 
-import com.acme.acmeflix.model.BaseModel;
-import com.acme.acmeflix.model.screenplay.Genre;
-import com.acme.acmeflix.model.screenplay.MaturityRating;
 import com.acme.acmeflix.model.screenplay.ScreenPlay;
-import com.acme.acmeflix.model.screenplay.involved.CrewMember;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
-
-import java.util.HashSet;
-import java.util.Set;
 
 @Setter
 @Getter
-@RequiredArgsConstructor
-//@AllArgsConstructor
-//@NoArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @SuperBuilder
-public class Movie extends BaseModel implements ScreenPlay {
+public class Movie extends ScreenPlay {
 
-    private String title;
-    private String description;
-    private Set<CrewMember> crewMembers = new HashSet<>();
-    private double duration;
-    private Set<Genre> genre = new HashSet<>();
-    private MaturityRating maturityRating;
 }
 

@@ -8,11 +8,12 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @SuperBuilder
 public class CrewMember extends BaseModel {
 
-  private String firstName;
-  private String lastName;
-  private Role role;
+    private String firstName;
+    private String lastName;
+    private Role role;
 }

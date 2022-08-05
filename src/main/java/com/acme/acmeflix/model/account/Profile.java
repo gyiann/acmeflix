@@ -11,6 +11,7 @@ import java.util.Set;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @SuperBuilder
 public class Profile extends BaseModel {

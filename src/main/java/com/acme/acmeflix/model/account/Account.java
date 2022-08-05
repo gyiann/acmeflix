@@ -8,16 +8,15 @@ import java.util.Set;
 
 @Setter
 @Getter
-//@RequiredArgsConstructor
 @AllArgsConstructor
-//@NoArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @SuperBuilder
 public class Account extends BaseModel {
-    
+
     private String email;
     private String phoneNumber;
     private SubscriptionPlan subscriptionPlan;
     private Set<Profile> profiles;
-
 }

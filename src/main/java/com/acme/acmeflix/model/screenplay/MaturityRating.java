@@ -1,10 +1,21 @@
 package com.acme.acmeflix.model.screenplay;
 
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 public enum MaturityRating {
 
-    PG,
-    PG_13,
-    R,
-    NC_17,
-    NOT_RATED
+    G(0),
+    PG(7),
+    PG_13(13),
+    R(16),
+    NC_17(17),
+    NOT_RATED(15);
+
+    private final int minimumAllowedAge;
+
+    public int getMinimumAllowedAge() {
+        return minimumAllowedAge;
+    }
+
 }

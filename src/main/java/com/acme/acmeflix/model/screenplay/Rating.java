@@ -1,15 +1,20 @@
 package com.acme.acmeflix.model.screenplay;
 
-import lombok.RequiredArgsConstructor;
+import com.acme.acmeflix.model.BaseModel;
+import com.acme.acmeflix.model.account.Profile;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
-@RequiredArgsConstructor
-public enum Rating {
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
+@SuperBuilder
+public class Rating extends BaseModel {
 
-    STAR_1((byte) 1),
-    STAR_2((byte) 2),
-    STAR_3((byte) 3),
-    STAR_4((byte) 4),
-    STAR_5((byte) 5);
-
-    private final byte ratingValue;
+    private ScreenPlay screenPlay;
+    private Profile profile;
+    private Rating rating;
 }

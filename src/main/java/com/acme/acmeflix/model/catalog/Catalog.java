@@ -12,11 +12,11 @@ import java.util.Set;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @SuperBuilder
 public class Catalog extends BaseModel {
 
-    private Country country;
     private Set<Movie> movies;
     private Set<TvShow> tvShows;
 }

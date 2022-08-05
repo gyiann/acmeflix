@@ -4,17 +4,17 @@ import com.acme.acmeflix.model.BaseModel;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
-import java.util.HashSet;
 import java.util.Set;
 
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @SuperBuilder
 public class Season extends BaseModel {
 
     private int number;
-    private Set<Episode> episodes = new HashSet<>();
+    private Set<Episode> episodes;
 }
