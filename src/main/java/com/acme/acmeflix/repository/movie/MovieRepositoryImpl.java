@@ -47,4 +47,14 @@ public class MovieRepositoryImpl extends BaseRepositoryImpl<Movie> implements Mo
                 .filter(movie -> movie.getGenres().contains(genre))
                 .collect(Collectors.toSet());
     }
+
+    @Override
+    public void addMovie(Movie movie) {
+        movies.put(movie.getId(), movie);
+    }
+
+    @Override
+    public void removeMovie(Movie movie) {
+        movies.remove(movie.getId());
+    }
 }

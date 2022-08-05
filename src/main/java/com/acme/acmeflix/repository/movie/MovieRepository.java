@@ -11,4 +11,8 @@ public interface MovieRepository extends BaseRepository<Movie, Long> {
     Set<Movie> findByTitle(String title);
 
     Set<Movie> findByGenre(Genre genre);
+
+    void addMovie(Movie movie);
+
+    void removeMovie(Movie movie);
 }
