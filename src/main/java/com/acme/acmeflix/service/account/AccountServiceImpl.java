@@ -1,5 +1,6 @@
 package com.acme.acmeflix.service.account;
 
+import com.acme.acmeflix.exception.BusinessException;
 import com.acme.acmeflix.model.account.Account;
 import com.acme.acmeflix.model.account.Profile;
 import com.acme.acmeflix.model.account.SubscriptionPlan;
@@ -11,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -29,18 +31,21 @@ public class AccountServiceImpl extends BaseServiceImpl<Account> implements Acco
     }
 
     @Override
-    public Account createNewAccount(String email) {
+    public Account createNewAccount(String email)
+            throws BusinessException {
         if (findByEmail(email) != null) {
-            return null;
+            logger.info("An account with this {} already exists.", email);
+            throw new BusinessException("An account with this " + email + " already exists.");
         }
         return create(Account.builder()
-                    .email(email)
-                    .profiles(new HashSet<>())
-                    .build());
+                .email(email)
+                .profiles(new HashSet<>())
+                .build());
     }
 
     @Override
-    public void registerAccount(Account account, String phoneNumber, SubscriptionPlan subscriptionPlan) {
+    public Account registerAccount(Account account, String phoneNumber, SubscriptionPlan subscriptionPlan)
+            throws BusinessException {
         Account updatedAccount = Account.builder()
                 .id(account.getId())
                 .email(account.getEmail())
@@ -48,7 +53,11 @@ public class AccountServiceImpl extends BaseServiceImpl<Account> implements Acco
                 .subscriptionPlan(subscriptionPlan)
                 .profiles(account.getProfiles())
                 .build();
-        update(updatedAccount);
+        if (update(updatedAccount)) {
+            return updatedAccount;
+        } else {
+            throw new BusinessException("Account registration failed.");
+        }
     }
 
     @Override
@@ -57,25 +66,53 @@ public class AccountServiceImpl extends BaseServiceImpl<Account> implements Acco
     }
 
     @Override
-    public Profile createProfile(Account account, String profileName) {
+    public Profile createProfile(Account account, String profileName)
+            throws BusinessException {
         if (findProfileByName(account, profileName) != null) {
-            return null;
+            throw new BusinessException("Unable to create profile " + profileName + " already exists.");
         }
         return accountRepository.createProfile(account, profileName);
     }
 
     @Override
-    public Profile removeProfile(Account account, Profile profile) {
-        return accountRepository.removeProfile(account, profile);
+    public boolean removeProfile(Account account, Profile profile)
+            throws BusinessException {
+        if (accountRepository.removeProfile(account, profile)) {
+            return true;
+        } else {
+            throw new BusinessException("Unable to remove profile " + profile.getName() + ".");
+        }
     }
 
     @Override
-    public void addToMyList(Profile profile, ScreenPlay screenPlay) {
-        accountRepository.addToMyList(profile, screenPlay);
+    public Set<Profile> getProfiles(Account account) {
+
+        return accountRepository.getProfiles(account);
     }
 
     @Override
-    public void removeFromMyList(Profile profile, ScreenPlay screenPlay) {
-        accountRepository.removeFromMyList(profile, screenPlay);
+    public boolean addToMyList(Profile profile, ScreenPlay screenPlay)
+            throws BusinessException {
+        if (accountRepository.addToMyList(profile, screenPlay)) {
+            return true;
+        } else {
+            throw new BusinessException("Unable to add ScreenPlayn to profile.");
+        }
+    }
+
+    @Override
+    public boolean removeFromMyList(Profile profile, ScreenPlay screenPlay)
+            throws BusinessException {
+        if (accountRepository.removeFromMyList(profile, screenPlay)) {
+            return true;
+        } else {
+            throw new BusinessException("Unable to add ScreenPlayn to profile.");
+        }
+    }
+
+    @Override
+    public Set<ScreenPlay> getMyList(Profile profile) {
+
+        return accountRepository.getMyList(profile);
     }
 }

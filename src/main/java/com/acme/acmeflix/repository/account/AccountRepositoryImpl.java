@@ -6,8 +6,10 @@ import com.acme.acmeflix.model.screenplay.ScreenPlay;
 import com.acme.acmeflix.repository.BaseRepositoryImpl;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Repository
@@ -33,6 +35,7 @@ public class AccountRepositoryImpl extends BaseRepositoryImpl<Account> implement
 
     @Override
     public Account findByEmail(String email) {
+
         return findAll().stream()
                 .filter(account -> account.getEmail().equals(email))
                 .findAny()
@@ -49,25 +52,60 @@ public class AccountRepositoryImpl extends BaseRepositoryImpl<Account> implement
 
     @Override
     public Profile createProfile(Account account, String profileName) {
-            Profile profile = Profile.builder()
-                    .name(profileName)
-                    .build();
-            account.getProfiles().add(profile);
-            return profile;
+        Profile profile = Profile.builder()
+                .name(profileName)
+                .myList(new HashSet<>())
+                .build();
+
+        initializeProfilesIfAbsent(account);
+        account.getProfiles().add(profile);
+        return profile;
+    }
+
+    @Override
+    public boolean removeProfile(Account account, Profile profile) {
+
+        initializeProfilesIfAbsent(account);
+        return account.getProfiles().remove(profile);
+    }
+
+    @Override
+    public Set<Profile> getProfiles(Account account) {
+
+        initializeProfilesIfAbsent(account);
+        return new HashSet<>(account.getProfiles());
+    }
+
+    @Override
+    public boolean addToMyList(Profile profile, ScreenPlay screenPlay) {
+
+        initializeMyListIfAbsent(profile);
+        return profile.getMyList().add(screenPlay);
+    }
+
+    @Override
+    public boolean removeFromMyList(Profile profile, ScreenPlay screenPlay) {
+
+        initializeMyListIfAbsent(profile);
+        return profile.getMyList().remove(screenPlay);
+    }
+
+    @Override
+    public Set<ScreenPlay> getMyList(Profile profile) {
+
+        initializeMyListIfAbsent(profile);
+        return new HashSet<>(profile.getMyList());
+    }
+
+    private void initializeProfilesIfAbsent(Account account) {
+        if (account.getProfiles() == null) {
+            account.setProfiles(new HashSet<>());
         }
-
-    @Override
-    public Profile removeProfile(Account account, Profile profile) {
-        return account.getProfiles().remove(profile) ? profile : null;
     }
 
-    @Override
-    public void addToMyList(Profile profile, ScreenPlay screenPlay) {
-        profile.getMyList().add(screenPlay);
-    }
-
-    @Override
-    public void removeFromMyList(Profile profile, ScreenPlay screenPlay) {
-        profile.getMyList().remove(screenPlay);
+    private void initializeMyListIfAbsent(Profile profile) {
+        if (profile.getMyList() == null) {
+            profile.setMyList(new HashSet<>());
+        }
     }
 }

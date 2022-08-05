@@ -5,14 +5,22 @@ import com.acme.acmeflix.model.account.Profile;
 import com.acme.acmeflix.model.screenplay.ScreenPlay;
 import com.acme.acmeflix.repository.BaseRepository;
 
+import java.util.Set;
+
 public interface AccountRepository extends BaseRepository<Account, Long> {
     Account findByEmail(String email);
+
     Profile findProfileByName(Account account, String profileName);
+
     Profile createProfile(Account account, String profileName);
 
-    Profile removeProfile(Account account, Profile profile);
+    boolean removeProfile(Account account, Profile profile);
 
-    void addToMyList(Profile profile, ScreenPlay screenPlay);
+    Set<Profile> getProfiles(Account account);
 
-    void removeFromMyList(Profile profile, ScreenPlay screenPlay);
+    boolean addToMyList(Profile profile, ScreenPlay screenPlay);
+
+    boolean removeFromMyList(Profile profile, ScreenPlay screenPlay);
+
+    Set<ScreenPlay> getMyList(Profile profile);
 }
